@@ -15,7 +15,7 @@ qr.add_data(url)
 qr.make(fit=True)
 
 # Create an image from the QR code instance
-img = qr.make_image(fill_color="white", back_color="navy")
+img = qr.make_image(fill_color="white", back_color="yellow")
 
 # Save the image to a file in a specific location
 file_path = "google_qr_code.png"  # You can change this to your desired file path
