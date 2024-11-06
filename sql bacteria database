@@ -1,0 +1,93 @@
+import sqlite3 
+
+def Creating_Database():
+    conn = sqlite3.connect("master.db")
+    cursor = conn.cursor()
+    #sql = "CREATE TABLE CommonBacteria (Name text, Effects text, Kingdom text)"
+    #cursor.execute(sql)
+#null, integer, real, text, blob are data types and storage classes you specify when creating your table and defining the columns 
+    cursor.execute("""CREATE TABLE CommonBacteria (
+                        Name text,
+                        Effects text,
+                        Kingdom text
+                        )""")
+
+
+
+    cursor.execute("INSERT INTO CommonBacteria VALUES ('Unknown', 'Unknown', 'Unknown')")
+
+
+
+    conn.commit()
+    cursor.close()
+
+
+def Add_Data():
+    conn = sqlite3.connect("master.db")
+    cursor = conn.cursor()
+    while True:
+        Name = input("CommonBacteria\'s Name:")
+        Effects = input("CommonBacteria\'s Effects:")
+        Kingdom = input("CommonBacteria\'s Kingdom:")
+        sql = "INSERT INTO CommonBacteria (Name, Effects, Kingdom) VALUES (:rName, :rEffects, :Kingdom)"
+        cursor.execute(sql, {'rName': Name, 'rEffects': Effects, 'rKingdom': Kingdom})
+        conn.commit() #this saves the data to the database 
+        loopcontrol = input ("Add another Bacteria (yes/no)?: ")
+        if loopcontrol == 'no':
+            break
+    cursor.close()
+
+
+def Fetch_Data():
+    conn = sqlite3.connect("master.db")
+    cursor = conn.connect()
+    sql = "SELECT * FROM CommonBacteria" # * means add all
+    results = cursor.execute(sql)
+    all_bacteria = results.fetchall()
+    for i in all_bacteria:
+        print(i)
+    conn.commit()
+    cursor.close()
+
+
+def Update_Data():
+    conn = sqlite3.connect("master.db")
+    cursor = conn.cursor()
+    sql = "UPDATE CommonBacteria SET Bacteria = 'Propionibacterium acnes' WHERE Bacteria 'Cutibacterium acnes'"
+    cursor.execute(sql)
+    conn.commit()
+    cursor.close()
+
+
+def Delete_Data():
+    conn = sqlite3
+    cursur = conn.cursor()
+    sql = "DELETE FROM CommonBacteria WHERE Name = 'aminovorans'"
+    cursor.execute(sql)
+    conn.commit()
+    cursor.close()
+    
+
+def main():
+    #Creating_Database()
+    Add_Data()
+    #Fetch_Data()
+    #Update_Data()
+    #Delete_Data()
+    
+
+main()
+                        
+"""
+def F(n):
+    if n == 0 or n == 1:
+       return 1
+    else:
+       return F(n-1)+F(n-2)
+
+def main():
+    print(F(5))
+
+main()
+"""
+                           
